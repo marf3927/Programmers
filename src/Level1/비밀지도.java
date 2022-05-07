@@ -2,7 +2,7 @@ package Level1;
 
 import java.util.Arrays;
 
-public class SecretMap {
+public class 비밀지도 {
     public static void main(String[] args) {
         solution(5, new int[]{9, 20, 28, 18, 11}, new int[]{30, 1, 21, 17, 28});
     }
@@ -14,9 +14,7 @@ public class SecretMap {
             Arrays.fill(chars, '0');
             char[] binaryChars = Integer.toBinaryString(arr[i]).toCharArray();
             int diff = chars.length - binaryChars.length;
-            for(int j=0; j<binaryChars.length; j++){
-                chars[j+diff] = binaryChars[j];
-            }
+            System.arraycopy(binaryChars, 0, chars, 0 + diff, binaryChars.length);
             for(int j=0; j<n; j++){
                 map[i][j] = Character.getNumericValue(chars[j]);
             }
