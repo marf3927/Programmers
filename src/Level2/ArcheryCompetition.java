@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 // 양궁대회
+// 못풂
 public class ArcheryCompetition {
     int[] answer = new int[11];
     int[] target = new int[11];

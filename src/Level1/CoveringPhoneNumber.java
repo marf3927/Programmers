@@ -1,6 +1,6 @@
 package Level1;
 
-// 핸드폰 번호 가리
+// 핸드폰 번호 가리기 
 public class CoveringPhoneNumber {
     public String solution(String phone_number) {
         String answer;
