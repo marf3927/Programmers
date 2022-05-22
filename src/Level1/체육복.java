@@ -4,31 +4,21 @@ import java.util.Arrays;
 
 public class 체육복 {
     public int solution(int n, int[] lost, int[] reserve) {
-        int[] s = new int[n];
-        Arrays.fill(s, 1);
-        for(int i : lost){
-            s[i-1] -= 1;
-        }
-        for(int i : reserve){
-            s[i-1] += 1;
-        }
-        for (int i=0; i<s.length; i++){
-            if(s[i]==0){
-                if(i>0 && s[i-1]>1){
-                    s[i]+=1;
-                    s[i-1]-=1;
-                }
-                if(i<s.length-1&& s[i+1]>1){
-                    s[i]+=1;
-                    s[i+1]-=1;
-                }
-            }
-        }
-        int answer = 0;
-        for(int i : s){
-            if(i>=1){
-                answer += 1;
-            }
+        int answer = n;
+        int c[] = new int[n+2];
+        for (int i : lost)
+            c[i]--;
+        for (int i : reserve)
+            c[i]++;
+
+        for (int i = 1; i < n+1; i++) {
+            if (c[i] == -1)
+                if (c[i - 1] == 1)
+                    c[i - 1] = c[i] = 0;
+                else if (c[i + 1] == 1)
+                    c[i + 1] = c[i] = 0;
+                else
+                    answer--;
         }
         return answer;
     }

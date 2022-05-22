@@ -1,12 +1,13 @@
 package Level1;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+// hashmap 사용하기
 public class 실패율 {
     public int[] solution(int N, int[] stages) {
-        int[] answer = new int[N];
-        for(int i = 0; i < N; i++) answer[i] = i+1;
-        double[] failRate = new double[N];
+        HashMap<Integer, Double>map = new HashMap<>(N);
         int up = 0;
         for(int i=1; i<=N; i++){
             double fail = 0;
@@ -15,21 +16,11 @@ public class 실패율 {
                     fail++;
                 }
             }
-            failRate[i-1] = fail/(stages.length-up);
+            map.put(i, fail==0 ? 0 :fail/(stages.length-up));
             up += fail;
         }
-        for(int i=0; i<N; i++){
-            for(int j=i+1; j < N; j++) {
-                if(failRate[i] < failRate[j]){
-                    double tempR = failRate[i];
-                    failRate[i] = failRate[j];
-                    failRate[j] =tempR;
-                    int tempA = answer[i];
-                    answer[i] = answer[j];
-                    answer[j] =tempA;
-                }
-            }
-        }
-        return answer;
+        List<Integer> answer = new ArrayList<>(map.keySet());
+        answer.sort((value1, value2) -> (map.get(value2).compareTo(map.get(value1))));
+        return answer.stream().mapToInt(i->i).toArray();
     }
 }
